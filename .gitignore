@@ -1,0 +1,12 @@
+# npm
+node_modules
+
+# IntelliJ IDEA
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/httpRequests
+
+# .gitignore doesn't work for tracked files  /:  please don't commit it
+#logs/lastBlock
+

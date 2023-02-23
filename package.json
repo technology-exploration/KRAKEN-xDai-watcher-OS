@@ -1,0 +1,39 @@
+{
+  "name": "kraken-ethereum-watcher",
+  "version": "2.0.0",
+  "description": "Watch Ethereum blocks as they come, send relevant info to Streamr",
+  "main": "index.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint *.js src test",
+    "test": "./node_modules/.bin/mocha --exit",
+    "start": "node index.js --streamrApiURL=http://localhost/api/v1 --devopsKey=devops-user-key --ethereumServerURL=http://localhost:8545 --verbose=2 --marketplaceAddress=0xF1371c0f40528406dc4f4cAf89924eA9Da49E866",
+    "krakenDevStart": "node index.js --streamrApiURL=http://localhost:9999 --devopsKey=devops-user-key --ethereumServerURL=http://localhost:7545 --verbose=2 --marketplaceAddress=0xF1371c0f40528406dc4f4cAf89924eA9Da49E866",
+    "krakenTestStart": "node index.js --streamrApiURL=http://localhost:9999 --devopsKey=devops-user-key --ethereumServerURL=https://sokol.poa.network --verbose=2 --marketplaceAddress=0x597b634364fd1b07762a1ED67CC7B0435e3141F4 --networkId=77",
+    "krakenStart": "node index.js --streamrApiURL=http://localhost:9999 --devopsKey=devops-user-key --ethereumServerURL=https://weathered-billowing-thunder.xdai.quiknode.pro/502bd1fa80407bcd07ebd4f14e37c6e5c20db640/ --verbose=2 --marketplaceAddress=0x1a4e6b8076e16a602eDE2E6938bd5cdb04c8E8b6 --networkId=100"
+  },
+  "keywords": [
+    "kraken",
+    "data marketplace"
+  ],
+  "author": "TX - Tomorrow Explored",
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "aws-sdk": "^2.235.1",
+    "bn.js": "4.11.8",
+    "ethers": "^4.0.27",
+    "node-fetch": "2.0.0",
+    "promise-events": "^0.1.4",
+    "sha3": "2.1.4",
+    "url-join": "^4.0.0",
+    "yargs": "11.0.0"
+  },
+  "devDependencies": {
+    "cli-table": "^0.3.1",
+    "eslint": "^5.16.0",
+    "ganache-cli": "6.12.2",
+    "ganache-core": "2.13.2",
+    "lodash": "^4.17.19",
+    "mocha": "^5.0.1",
+    "sinon": "^4.4.2"
+  }
+}

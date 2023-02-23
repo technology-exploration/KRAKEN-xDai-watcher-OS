@@ -1,0 +1,47 @@
+language: node_js
+node_js:
+- '14'
+sudo: required
+services:
+- docker
+branches:
+  only:
+  - master
+  - "/^v\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
+env:
+  global:
+  - secure: $SECURE_KEY
+  - secure: $SECURE_KEY
+  - IMAGE_NAME=ethereum-watcher
+jobs:
+  include:
+  - stage: Lint & unit tests
+    script:
+    - npm run lint
+    - npm run test
+  - stage: Build docker (Dev/Nightly)
+    if: tag IS blank
+    install: true
+    script:
+    - docker build -t $OWNER/$IMAGE_NAME:local .
+    - .travis_scripts/smoke_test.sh
+    deploy:
+    - provider: script
+      script: bash .travis_scripts/deploy_docker.sh dev
+  - stage: Build docker (Production)
+    if: tag IS present
+    install: true
+    script:
+    - docker build -t $OWNER/$IMAGE_NAME:local .
+    - .travis_scripts/smoke_test.sh
+    deploy:
+    - provider: script
+      script: bash .travis_scripts/deploy_docker.sh production
+      on:
+        tags: true
+notifications:
+  slack:
+    secure: $SLACK_KEY
+  on_success: change
+  on_failure: always
+  on_pull_requests: false
